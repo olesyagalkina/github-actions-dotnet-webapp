@@ -1,0 +1,32 @@
+name: CI Workflow  
+
+on:
+  push:           
+    branches:
+      - main            # workflow acionado por push no branch main
+  schedule:
+    - cron: '0 * * * *' # executa a cada hora
+
+jobs:
+  push-job:             # é acionado pelo evento de push
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Run build
+      run: echo "Building project on push..."
+
+    - name: Run tests
+      run: echo "Running tests on push..."
+
+  cron-job:             # é acionado pelo agendamento
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Execute scheduled task
+      run: echo "Running scheduled task every hour..."
